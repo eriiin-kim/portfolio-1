@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="김현서(KIM HYEONSEO) - 나무위키 스타일 포트폴리오. AI와 한시도 떨어지지 않는 취업준비생의 이야기.">
+  <title>김현서 - 나무위키</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== THEME VARIABLES ===== */
+    :root[data-theme="light"] {
+      --bg-page: #f5f5f5;
+      --bg-card: #fff;
+      --bg-toc: #f9f9f9;
+      --bg-quote: #f0f7fb;
+      --bg-quote-border: #b8d4e8;
+      --bg-project: #fafafa;
+      --bg-project-border: #e8e8e8;
+      --bg-tmi-border: #f0f0f0;
+      --bg-skill-row-border: #f0f0f0;
+      --bg-skill-badge: linear-gradient(135deg, #f3eaf8, #e8d5f5);
+      --bg-skill-badge-border: #d9c4e8;
+      --bg-quote-section: #f7fafa;
+      --bg-infobox-caption: #faf7fc;
+      --bg-infobox-th: #f3eaf8;
+      --bg-search: rgba(255, 255, 255, 0.9);
+      --bg-footnote-highlight: #fff3cd;
+      --bg-title-hover: #f0f0f0;
+
+      --text-primary: #1a1a1a;
+      --text-secondary: #333;
+      --text-tertiary: #555;
+      --text-muted: #666;
+      --text-faint: #888;
+      --text-caption: #999;
+      --text-strike: #999;
+
+      --link-color: #0275d8;
+      --link-hover: #014c8c;
+
+      --border-main: #ddd;
+      --border-light: #ccc;
+      --border-infobox: #c6a0d8;
+      --border-infobox-inner: #e0cfe8;
+      --border-infobox-cell: #ece0f2;
+
+      --accent-teal: #00a495;
+      --accent-purple: #9b59b6;
+      --accent-purple-dark: #7b2d8e;
+      --accent-purple-text: #5a2d6a;
+
+      --topbar-bg: #00a495;
+      --breadcrumb-bg: #fff;
+      --title-bg: #fff;
+      --footer-bg: #333;
+      --footer-text: #aaa;
+      --footer-link: #ccc;
+
+      --shadow-topbar: rgba(0, 0, 0, 0.1);
+    }
+
+    :root[data-theme="dark"] {
+      --bg-page: #1a1a2e;
+      --bg-card: #16213e;
+      --bg-toc: #1a1a2e;
+      --bg-quote: #1a2a3a;
+      --bg-quote-border: #2a4a6a;
+      --bg-project: #1a1a2e;
+      --bg-project-border: #2a2a4e;
+      --bg-tmi-border: #2a2a4e;
+      --bg-skill-row-border: #2a2a4e;
+      --bg-skill-badge: linear-gradient(135deg, #2a1a3e, #3a2a5e);
+      --bg-skill-badge-border: #4a3a6e;
+      --bg-quote-section: #1a2a2e;
+      --bg-infobox-caption: #1a1a2e;
+      --bg-infobox-th: #2a1a3e;
+      --bg-search: rgba(30, 30, 50, 0.9);
+      --bg-footnote-highlight: #3a3520;
+      --bg-title-hover: #2a2a4e;
+
+      --text-primary: #e0e0e0;
+      --text-secondary: #ccc;
+      --text-tertiary: #aaa;
+      --text-muted: #999;
+      --text-faint: #888;
+      --text-caption: #777;
+      --text-strike: #666;
+
+      --link-color: #5dade2;
+      --link-hover: #85c1e9;
+
+      --border-main: #2a2a4e;
+      --border-light: #3a3a5e;
+      --border-infobox: #6a4a8e;
+      --border-infobox-inner: #4a3a6e;
+      --border-infobox-cell: #3a2a5e;
+
+      --accent-teal: #00b4a4;
+      --accent-purple: #b478cf;
+      --accent-purple-dark: #9b59b6;
+      --accent-purple-text: #c9a0e0;
+
+      --topbar-bg: #0a2a3e;
+      --breadcrumb-bg: #16213e;
+      --title-bg: #16213e;
+      --footer-bg: #0a0a1e;
+      --footer-text: #777;
+      --footer-link: #999;
+
+      --shadow-topbar: rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 15px;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--link-hover);
+    }
+
+    /* ===== NAMU WIKI TOP BAR ===== */
+    .namu-topbar {
+      background: var(--topbar-bg);
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px var(--shadow-topbar);
+      transition: background 0.35s ease;
+    }
+
+    .namu-topbar .logo {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .namu-topbar .logo .leaf {
+      font-size: 1.4rem;
+    }
+
+    .namu-topbar .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .namu-topbar .search-bar input {
+      width: 220px;
+      height: 32px;
+      border: none;
+      border-radius: 4px;
+      padding: 0 12px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      background: var(--bg-search);
+      color: var(--text-primary);
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    .namu-topbar .search-bar input::placeholder {
+      color: var(--text-caption);
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .theme-toggle .toggle-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="dark"] .toggle-switch {
+      background: rgba(93, 173, 226, 0.4);
+    }
+
+    [data-theme="dark"] .toggle-switch::after {
+      transform: translateX(20px);
+      background: #5dade2;
+    }
+
+    .theme-toggle .icon-sun,
+    .theme-toggle .icon-moon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* ===== BREADCRUMB ===== */
+    .breadcrumb-bar {
+      background: var(--breadcrumb-bg);
+      border-bottom: 1px solid var(--border-main);
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .breadcrumb-bar a {
+      color: var(--link-color);
+    }
+
+    /* ===== TITLE AREA ===== */
+    .page-title-area {
+      background: var(--title-bg);
+      border-bottom: 2px solid var(--accent-teal);
+      padding: 16px 20px;
+      transition: background 0.35s ease;
+    }
+
+    .page-title-area h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .page-title-area h1 .sub {
+      font-size: 0.9rem;
+      color: var(--text-faint);
+      font-weight: 400;
+    }
+
+    .title-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 6px;
+      font-size: 0.8rem;
+    }
+
+    .title-actions a {
+      color: var(--text-faint);
+      border: 1px solid var(--border-main);
+      padding: 2px 10px;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+
+    .title-actions a:hover {
+      background: var(--bg-title-hover);
+      text-decoration: none;
+    }
+
+    /* ===== LAYOUT CONTAINER ===== */
+    .content-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-main);
+      border-radius: 2px;
+      padding: 24px 28px;
+      min-width: 0;
+      order: 1;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    /* ===== INFOBOX (우측 프로필) ===== */
+    .infobox {
+      background: var(--bg-card);
+      border: 1px solid var(--border-infobox);
+      border-radius: 2px;
+      overflow: hidden;
+      order: 2;
+      position: sticky;
+      top: 64px;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .infobox-title {
+      background: linear-gradient(135deg, var(--accent-purple-dark), var(--accent-purple));
+      color: #fff;
+      text-align: center;
+      padding: 10px 12px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+
+    .infobox-img {
+      width: 100%;
+      display: block;
+      border-bottom: 1px solid var(--border-infobox-inner);
+    }
+
+    .infobox-img-caption {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-caption);
+      padding: 4px 8px 6px;
+      background: var(--bg-infobox-caption);
+      border-bottom: 1px solid var(--border-infobox-inner);
+      transition: background 0.35s ease;
+    }
+
+    .infobox table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .infobox table th,
+    .infobox table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--border-infobox-cell);
+    }
+
+    .infobox table th {
+      background: var(--bg-infobox-th);
+      color: var(--accent-purple-text);
+      font-weight: 600;
+      text-align: center;
+      width: 90px;
+      white-space: nowrap;
+      border-right: 1px solid var(--border-infobox-inner);
+      transition: background 0.35s ease;
+    }
+
+    .infobox table td {
+      text-align: left;
+      color: var(--text-secondary);
+      word-break: break-all;
+    }
+
+    .infobox table tr:last-child th,
+    .infobox table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ===== TOC (목차) ===== */
+    .toc-box {
+      border: 1px solid var(--border-light);
+      background: var(--bg-toc);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      border-radius: 2px;
+      display: inline-block;
+      min-width: 240px;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .toc-box .toc-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toc-box .toc-title .toggle-icon {
+      font-size: 0.7rem;
+      transition: transform 0.3s ease;
+    }
+
+    .toc-box .toc-title .toggle-icon.collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .toc-box ol {
+      list-style: none;
+      counter-reset: toc-counter;
+      padding-left: 0;
+    }
+
+    .toc-box ol li {
+      counter-increment: toc-counter;
+      padding: 3px 0;
+      font-size: 0.9rem;
+    }
+
+    .toc-box ol li::before {
+      content: counter(toc-counter) ". ";
+      color: var(--link-color);
+      font-weight: 500;
+    }
+
+    .toc-box ol li a {
+      color: var(--link-color);
+    }
+
+    .toc-box ol ol {
+      padding-left: 20px;
+      counter-reset: toc-sub-counter;
+    }
+
+    .toc-box ol ol li {
+      counter-increment: toc-sub-counter;
+    }
+
+    .toc-box ol ol li::before {
+      content: counter(toc-counter) "." counter(toc-sub-counter) ". ";
+    }
+
+    /* ===== BLOCKQUOTE (인용구/요약문) ===== */
+    .namu-quote {
+      background: var(--bg-quote);
+      border: 1px solid var(--bg-quote-border);
+      border-left: 4px solid var(--link-color);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      border-radius: 2px;
+      text-align: center;
+      font-weight: 500;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    /* ===== SECTION HEADINGS ===== */
+    .section-heading {
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 6px;
+      margin: 32px 0 16px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      scroll-margin-top: 64px;
+    }
+
+    .section-heading:first-of-type {
+      margin-top: 0;
+    }
+
+    .section-heading .sec-num {
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    .section-heading h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .subsection-heading {
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 4px;
+      margin: 24px 0 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      scroll-margin-top: 64px;
+    }
+
+    .subsection-heading .sec-num {
+      color: var(--accent-teal);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .subsection-heading h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ===== PARAGRAPH ===== */
+    .content-para {
+      margin-bottom: 16px;
+      line-height: 1.85;
+    }
+
+    /* ===== STRIKETHROUGH (취소선) ===== */
+    .namu-strike {
+      text-decoration: line-through;
+      color: var(--text-strike);
+      font-size: 0.92em;
+    }
+
+    /* ===== FOOTNOTE (각주) ===== */
+    .footnote-ref {
+      color: var(--link-color);
+      cursor: pointer;
+      font-size: 0.72em;
+      vertical-align: super;
+      font-weight: 700;
+      line-height: 0;
+      margin-left: 1px;
+      transition: color 0.2s;
+    }
+
+    .footnote-ref:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    .footnote-section {
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-main);
+    }
+
+    .footnote-section .fn-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .footnote-item {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      padding: 4px 0 4px 0;
+      scroll-margin-top: 64px;
+      line-height: 1.6;
+      display: flex;
+      gap: 6px;
+    }
+
+    .footnote-item .fn-num {
+      color: var(--link-color);
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .footnote-item .fn-num:hover {
+      text-decoration: underline;
+    }
+
+    .footnote-item.highlight {
+      background: var(--bg-footnote-highlight);
+      border-radius: 2px;
+      padding: 4px 6px;
+      transition: background 0.5s ease;
+    }
+
+    /* ===== BULLET LIST ===== */
+    .namu-list {
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+
+    .namu-list li {
+      margin-bottom: 6px;
+      line-height: 1.75;
+    }
+
+    .namu-list li strong {
+      color: var(--text-primary);
+    }
+
+    /* ===== HR ===== */
+    .namu-hr {
+      border: none;
+      border-top: 1px solid var(--border-main);
+      margin: 20px 0;
+    }
+
+    /* ===== PROJECT CARD ===== */
+    .project-card {
+      background: var(--bg-project);
+      border: 1px solid var(--bg-project-border);
+      border-left: 3px solid var(--accent-purple);
+      border-radius: 2px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .project-card .project-title {
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: var(--accent-purple-text);
+      margin-bottom: 8px;
+    }
+
+    .project-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .project-card ul li {
+      padding: 3px 0;
+      font-size: 0.93rem;
+      display: flex;
+      gap: 6px;
+    }
+
+    .project-card ul li strong {
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
+
+    /* ===== SKILL BADGES ===== */
+    .skill-grid {
+      margin-bottom: 16px;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg-skill-row-border);
+    }
+
+    .skill-row:last-child {
+      border-bottom: none;
+    }
+
+    .skill-label {
+      font-weight: 600;
+      color: var(--accent-purple-text);
+      white-space: nowrap;
+      min-width: 130px;
+    }
+
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-badge {
+      display: inline-block;
+      background: var(--bg-skill-badge);
+      color: var(--accent-purple-text);
+      padding: 3px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid var(--bg-skill-badge-border);
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    /* ===== QUOTE SECTION (어록) ===== */
+    .quote-item {
+      border-left: 3px solid var(--accent-teal);
+      background: var(--bg-quote-section);
+      padding: 10px 16px;
+      margin-bottom: 10px;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      border-radius: 0 2px 2px 0;
+      transition: background 0.35s ease;
+    }
+
+    /* ===== TMI LIST ===== */
+    .tmi-item {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg-tmi-border);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .tmi-item:last-child {
+      border-bottom: none;
+    }
+
+    .tmi-item::before {
+      content: "•";
+      color: var(--accent-purple);
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    /* ===== FOOTER ===== */
+    .namu-footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      margin-top: 40px;
+      transition: background 0.35s ease;
+    }
+
+    .namu-footer a {
+      color: var(--footer-link);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      html {
+        font-size: 14px;
+      }
+
+      .namu-topbar .search-bar input {
+        width: 120px;
+      }
+
+      .content-wrapper {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 16px;
+      }
+
+      .infobox {
+        order: 0;
+        position: static;
+      }
+
+      .main-content {
+        order: 1;
+        padding: 16px;
+      }
+
+      .page-title-area h1 {
+        font-size: 1.4rem;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .toc-box {
+        display: block;
+        min-width: auto;
+      }
+
+      .skill-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .theme-toggle .toggle-label {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .namu-topbar .search-bar input {
+        width: 100px;
+      }
+
+      .page-title-area {
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <header class="namu-topbar" id="top">
+    <div class="logo">
+      <span class="leaf">🌳</span> 나무위키
+    </div>
+    <div class="topbar-right">
+      <div class="search-bar">
+        <input type="text" placeholder="여기에서 검색" disabled>
+      </div>
+      <div class="theme-toggle" id="theme-toggle" title="라이트/다크 모드 전환">
+        <span class="icon-sun">☀️</span>
+        <div class="toggle-switch" id="toggle-switch"></div>
+        <span class="icon-moon">🌙</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb-bar">
+    <a href="#top">나무위키</a> &gt; <a href="#top">인물</a> &gt; <span>김현서</span>
+  </nav>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title-area">
+    <h1>김현서 <span class="sub">(KIM HYEONSEO)</span></h1>
+    <div class="title-actions">
+      <a href="#">편집</a>
+      <a href="#">역사</a>
+      <a href="#">토론</a>
+      <a href="#">ACL</a>
+    </div>
+  </div>
+
+  <!-- CONTENT AREA -->
+  <div class="content-wrapper">
+
+    <!-- ===== INFOBOX (우측 프로필표) ===== -->
+    <aside class="infobox" role="complementary">
+      <div class="infobox-title">김현서</div>
+      <img class="infobox-img" src="khs.jpg" alt="김현서 프로필 사진">
+      <div class="infobox-img-caption">프로필 사진</div>
+      <table>
+        <tr>
+          <th>본명</th>
+          <td>김현서(金賢諝)<a class="footnote-ref" href="#fn1" id="fnref1">[1]</a></td>
+        </tr>
+        <tr>
+          <th>출생</th>
+          <td>2001년 05월 25일<br>대한민국 부산광역시</td>
+        </tr>
+        <tr>
+          <th>거주지</th>
+          <td>부산광역시</td>
+        </tr>
+        <tr>
+          <th>학력</th>
+          <td>부산대학교 디자인학과<br>디자인앤테크놀로지전공<br>(학사/졸업)<a class="footnote-ref" href="#fn2" id="fnref2">[2]</a></td>
+        </tr>
+        <tr>
+          <th>신체</th>
+          <td>172cm, O형</td>
+        </tr>
+        <tr>
+          <th>가족관계</th>
+          <td>아버지, 어머니, 오빠, 언니<a class="footnote-ref" href="#fn3" id="fnref3">[3]</a></td>
+        </tr>
+        <tr>
+          <th>MBTI</th>
+          <td>INTJ</td>
+        </tr>
+        <tr>
+          <th>주요 스킬</th>
+          <td>Photoshop, Illustrator,<br>Premier Pro,<br>Google Antigravity</td>
+        </tr>
+        <tr>
+          <th>이메일</th>
+          <td><a href="mailto:georia0525@naver.com">georia0525@naver.com</a></td>
+        </tr>
+        <tr>
+          <th>기타<br>(Mobile)</th>
+          <td>010.2269.5382</td>
+        </tr>
+      </table>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <article class="main-content" role="main">
+
+      <!-- 인용구 (상단 요약문) -->
+      <div class="namu-quote">
+        <strong>"[재미 빼면 시체]"</strong>
+      </div>
+
+      <!-- 목차 -->
+      <nav class="toc-box" id="toc" aria-label="목차">
+        <div class="toc-title" id="toc-toggle">
+          <span class="toggle-icon" id="toc-icon">▼</span> 목차
+        </div>
+        <div id="toc-list">
+          <ol>
+            <li><a href="#sec2">개요</a></li>
+            <li><a href="#sec3">특징 및 업무 스타일</a></li>
+            <li><a href="#sec4">상세 스킬 (Tech Stack)</a></li>
+            <li>
+              <a href="#sec5">활동 및 프로젝트</a>
+              <ol>
+                <li><a href="#sec5-1">Hommage</a></li>
+                <li><a href="#sec5-2">Streamline Workflow by Ms Power Platform</a></li>
+              </ol>
+            </li>
+            <li><a href="#sec6">여담 (TMI)</a></li>
+            <li><a href="#sec7">어록</a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <!-- 2. 개요 -->
+      <div class="section-heading" id="sec2">
+        <span class="sec-num">2.</span>
+        <h2>개요</h2>
+      </div>
+      <p class="content-para">
+        김현서는 AI랑 한시도 떨어지지 않고 붙어있는 취업준비생이다.
+      </p>
+      <p class="content-para">
+        주로 Gemini Pro나 Google Antigravity을(를) 못살게 굴며, 본인의 호기심을 해결하고 구현하는 작업을 한다. 스스로의 영감이나 창의력이 많은 사람들에게 재미를 제공하는 것을 목표로
+        하고 있다. <span class="namu-strike">여전히 자신보다 웃긴 사람을 본 적이 없다고 한다</span>
+      </p>
+
+      <!-- 3. 특징 및 업무 스타일 -->
+      <div class="section-heading" id="sec3">
+        <span class="sec-num">3.</span>
+        <h2>특징 및 업무 스타일</h2>
+      </div>
+      <ul class="namu-list">
+        <li>
+          <strong>[특징 1: 집요한 문제 이해 능력]</strong><br>
+          본인이 납득할 때까지 문제를 이해하고 정의하는 편이다.
+        </li>
+        <li>
+          <strong>[특징 2: 더 나은 방향을 끊임없이 고민하는 리더십]</strong><br>
+          팀 프로젝트나 협업 시 이해관계를 파악하고 팀의 궁극적인 목표를 달성하기 위해 더 나은 방식을 끊임없이 고민하는 스타일이다.
+        </li>
+      </ul>
+
+      <!-- 4. 상세 스킬 -->
+      <div class="section-heading" id="sec4">
+        <span class="sec-num">4.</span>
+        <h2>상세 스킬 (Tech Stack)</h2>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-row">
+          <span class="skill-label">언어 &amp; 프레임워크</span>
+          <div class="skill-badges">
+            <span class="skill-badge">C</span>
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">Java</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">도구 &amp; 툴</span>
+          <div class="skill-badges">
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge">Figma</span>
+            <span class="skill-badge">Notion</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">기타</span>
+          <div class="skill-badges">
+            <span class="skill-badge">컴퓨터활용능력 2급</span>
+            <span class="skill-badge">OPIc IH</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. 활동 및 프로젝트 -->
+      <div class="section-heading" id="sec5">
+        <span class="sec-num">5.</span>
+        <h2>활동 및 프로젝트</h2>
+      </div>
+
+      <!-- 5.1 Hommage -->
+      <div class="subsection-heading" id="sec5-1">
+        <span class="sec-num">5.1.</span>
+        <h3>Hommage (2023.01 - 2023.11)</h3>
+      </div>
+      <div class="project-card">
+        <div class="project-title">🎨 Hommage</div>
+        <ul>
+          <li><strong>한 줄 소개:</strong> <span>제14회 부산대학교 디자인앤테크놀로지전공 졸업전시회 인터랙티브 미디어 전시 운영</span></li>
+          <li><strong>담당 역할:</strong> <span>전시 운영 총괄팀장</span></li>
+          <li><strong>성과 및 배운 점:</strong> <span>협력 업체와 커뮤니케이션 스킬 획득, 스케줄 관리 능력</span></li>
+        </ul>
+      </div>
+
+      <!-- 5.2 Streamline Workflow -->
+      <div class="subsection-heading" id="sec5-2">
+        <span class="sec-num">5.2.</span>
+        <h3>Streamline Workflow by Ms Power Platform (2022.08.19 - 2022.08.21)</h3>
+      </div>
+      <div class="project-card">
+        <div class="project-title">⚡ Streamline Workflow by Ms Power Platform</div>
+        <ul>
+          <li><strong>한 줄 소개:</strong> <span>협업 자동화를 위한 서비스 개발 프로젝트(해커톤) 참여</span></li>
+          <li><strong>담당 역할:</strong> <span>서비스 기획 / 서비스 UI 제작 / 발표 자료 제작</span></li>
+          <li><strong>성과 및 배운 점:</strong> <span>마이크로소프트 트랙 1위 수상 🏆</span></li>
+        </ul>
+      </div>
+
+      <!-- 6. 여담 (TMI) -->
+      <div class="section-heading" id="sec6">
+        <span class="sec-num">6.</span>
+        <h2>여담 (TMI)</h2>
+      </div>
+      <div>
+        <div class="tmi-item">키가 꽤 큰 편이다. 초등학교 5학년 때 친구가 같이 농구학원을 다니자고 꼬셔서 다녔다가 2년 간 초등부로 활약했다고 한다.</div>
+        <div class="tmi-item">학창시절 조던.B.피터슨의 '12가지 인생의 법칙'을 읽으며 대학입시에 대한 멘탈을 단련했다고 한다. 대학에 가서는 빅토르 프랑클의 '죽음의 수용소'를 읽고
+          슬럼프를 이겨내는 데 도움을 많이 받았다고 한다.</div>
+        <div class="tmi-item">유튜브 채널 중 '보다(BODA)'를 가장 좋아한다. 과학이랑 역사에 대한 지식을 배우는 걸 좋아하기 때문에 영상을 보면 뇌가 똑똑해지는 기분이 든다고 한다.
+        </div>
+        <div class="tmi-item">오버워치를 즐겨한다. 주 챔피언은 솜브라. 하지만 애쉬를 잘하고 싶어 항상 애쉬를 픽하다가 게임이 질 것 같으면 솜브라로 바꾸는 편이다.</div>
+      </div>
+
+      <!-- 7. 어록 -->
+      <div class="section-heading" id="sec7">
+        <span class="sec-num">7.</span>
+        <h2>어록</h2>
+      </div>
+      <div class="quote-item">"여기서 멈추지 마십시오."</div>
+      <div class="quote-item">"예술가여, 무엇이 두려운가!"</div>
+
+      <!-- 각주 섹션 -->
+      <div class="footnote-section">
+        <div class="fn-title">각주</div>
+        <div class="footnote-item" id="fn1">
+          <span class="fn-num" onclick="scrollToRef('fnref1')">[1]</span>
+          <span>아버지가 이름을 지을 당시, 드라마 '가을동화'의 여주인공 '은서'에서 아이디어를 얻었고, 언니와 돌림자인 '현'을 합쳐 '현서'가 되었다고 한다.</span>
+        </div>
+        <div class="footnote-item" id="fn2">
+          <span class="fn-num" onclick="scrollToRef('fnref2')">[2]</span>
+          <span>2026학년도부터 예술대학 디자인학과 소속에서 정보의생명공학대학 정보컴퓨터공학부 세부전공으로 변경되었다.</span>
+        </div>
+        <div class="footnote-item" id="fn3">
+          <span class="fn-num" onclick="scrollToRef('fnref3')">[3]</span>
+          <span>4살 터울이다.</span>
+        </div>
+      </div>
+
+    </article>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="namu-footer">
+    <p>이 문서는 나무위키 스타일 포트폴리오입니다. | <a href="#">CC BY-NC-SA 2.0 KR</a></p>
+    <p style="margin-top: 4px;">최종 수정: 2026.03.04</p>
+  </footer>
+
+  <script>
+    // ===== 테마 토글 =====
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // 저장된 테마 불러오기
+    const savedTheme = localStorage.getItem('namu-theme');
+    if (savedTheme) {
+      html.setAttribute('data-theme', savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      html.setAttribute('data-theme', 'dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('namu-theme', next);
+    });
+
+    // OS 테마 변경 감지
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('namu-theme')) {
+        html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      }
+    });
+
+    // ===== 목차 토글 =====
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocList = document.getElementById('toc-list');
+    const tocIcon = document.getElementById('toc-icon');
+
+    tocToggle.addEventListener('click', () => {
+      const isHidden = tocList.style.display === 'none';
+      tocList.style.display = isHidden ? 'block' : 'none';
+      tocIcon.classList.toggle('collapsed', !isHidden);
+    });
+
+    // ===== 각주 하이라이트 =====
+    function scrollToRef(refId) {
+      const el = document.getElementById(refId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // 각주 링크 클릭 시 하이라이트
+    document.querySelectorAll('.footnote-ref').forEach(ref => {
+      ref.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = ref.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.classList.add('highlight');
+          setTimeout(() => target.classList.remove('highlight'), 2000);
+        }
+      });
+    });
+
+    // 각주 번호 클릭 시 원래 위치로 복귀
+    document.querySelectorAll('.footnote-item .fn-num').forEach(num => {
+      num.addEventListener('click', () => {
+        const fnId = num.parentElement.id;
+        const refId = fnId.replace('fn', 'fnref');
+        scrollToRef(refId);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
